@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import sanityClient from '../client';
+import formatRupiah from '../utils/formatRupiah';
 
 const BestProducts = () => {
-  const [products, setProducts] = useState(['uwu1', 'uwu2']);
+  const [products, setProducts] = useState(null);
 
   useEffect(() => {
-    setProducts([
-      {
-        title: 'Product 1',
-        price: 69000,
-        desc: 'This is the single best product in the whole online shop. No cap.',
-        category: 'food',
-        limitedslot: true,
-        bestseller: true,
-      },
-      {
-        title: 'Product 2',
-        price: 420000,
-        desc: 'This is the second best product in the whole online shop. No cap.',
-        category: 'food',
-        limitedslot: false,
-        bestseller: true,
+    sanityClient
+    .fetch(`
+      *[_type == 'product']{
+        name,
+        price,
+        desc,
+        limitedslot,
+        category
       }
-    ])
+    `)
+    .then(res => {
+      console.log(res);
+      console.log(formatRupiah(res[0].price)); //Whole ass bug.
+    })
+    .catch(err => console.log(err));
   }, []);
 
 
@@ -51,7 +50,7 @@ const BestProducts = () => {
 
         <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16">
           
-          {
+          {/* {
             products && products.map(product => (
               <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
                 <a href="#_" class="block">
@@ -65,10 +64,9 @@ const BestProducts = () => {
                 <p class="pt-2 text-xs font-medium">
                   { product.limitedslot ? (  <span class="mx-1"> · Limited Slot!</span> ) : <span></span>}
                 </p>
-            </div>
+              </div>
             ))
-          }
-
+          } */}
         </div>
     </div>
 </section>

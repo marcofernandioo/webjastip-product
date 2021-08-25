@@ -14,7 +14,7 @@ export default {
       type: 'string'
     },
     {
-      title: 'Harga',
+      title: 'Harga (Rp.)',
       name: 'price',
       type: 'number'
     },
@@ -25,14 +25,11 @@ export default {
     },
     {
       title: 'Kategori',
-      name: 'categories',
-      type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: {type: 'category'}
-        }
-      ]
+      name: 'category',
+      type: 'reference',
+      to: [{
+        type: 'kategori'
+      }]
     },
     {
       title: 'Slot terbatas',
@@ -46,7 +43,7 @@ export default {
       name: 'bestseller',
       type: 'boolean',
       initialValue: false,
-      description: 'Produk dengan label bestseller akan ditampilkan di halaman utama.'
+      description: 'Produk dengan label bestseller akan ditampilkan di halaman utama website.'
     },
     // {
     //   title: "Color List",

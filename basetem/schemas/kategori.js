@@ -1,33 +1,16 @@
 export default {
-  name: 'content',
-  title: 'Konten',
+  name: 'kategori',
+  title: 'Kategori',
   type: 'document',
   fields: [
     {
-      title: 'Bagian',
-      name: 'section',
-      type: 'string',
-      readOnly: true
-    },
-    {
-      title: 'Judul',
+      title: 'Kategori',
       name: 'title',
       type: 'string'
     },
     {
-      title: 'Deskripsi',
-      name: 'text',
-      type: 'string',
-      description: 'uwu',
-    },
-    {
-      title: 'Logo',
-      name: 'logo',
-      type: 'image'
-    },
-    {
-      title: "Warna Utama",
-      description: 'Warna yang dipilih akan menjadi warna utama pada website.',
+      title: "Warna Kategori",
+      description: 'Warna.',
       name: "color",
       type: "colorlist",
       options: {
