@@ -7,7 +7,7 @@ export default {
       title: 'Bagian',
       name: 'section',
       type: 'string',
-      readOnly: true
+      // readOnly: true
     },
     {
       title: 'Judul',
@@ -17,7 +17,7 @@ export default {
     {
       title: 'Deskripsi',
       name: 'text',
-      type: 'string',
+      type: 'text',
       description: 'uwu',
     },
     {
@@ -42,5 +42,11 @@ export default {
         ]
       }
     },
-  ]
+  ], 
+  preview: {
+    select: {
+      title: 'section',
+      subtitle: 'title',
+    }
+  }
 }

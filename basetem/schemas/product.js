@@ -27,9 +27,7 @@ export default {
       title: 'Kategori',
       name: 'category',
       type: 'reference',
-      to: [{
-        type: 'kategori'
-      }]
+      to: {type: 'kategori'}
     },
     {
       title: 'Slot terbatas',
