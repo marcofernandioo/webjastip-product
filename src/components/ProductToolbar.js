@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import sanityClient from '../client';
 
 const ProductToolbar = ({parentCallback}) => {
     const [search, setSearch] = useState(null);
 
     return (
-        <div>
+        <div class="fixed left-0 right-0 top-10">
             {/* Search Product */}
             <div class="p-8">
                 <div class="bg-white flex items-center rounded-full shadow-xl">
