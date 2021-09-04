@@ -6,28 +6,33 @@ export default {
     {
       title: "Gambar",
       name: 'image',
-      type: 'image'
+      type: 'image',
+      validation: Rule => Rule.required()
     },
     {
       title: "Nama",
       name: 'name',
-      type: 'string'
+      type: 'string',
+      validation: Rule => Rule.required()
     },
     {
       title: 'Harga (Rp.)',
       name: 'price',
-      type: 'number'
+      type: 'number',
+      validation: Rule => Rule.required()
     },
     {
       title: 'Keterangan',
       name: 'desc',
       type: 'string',
+      validation: Rule => Rule.required()
     },
     {
       title: 'Kategori',
       name: 'category',
       type: 'reference',
-      to: {type: 'kategori'}
+      to: {type: 'kategori'},
+      validation: Rule => Rule.required()
     },
     {
       title: 'Slot terbatas',

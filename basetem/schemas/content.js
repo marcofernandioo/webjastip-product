@@ -12,18 +12,20 @@ export default {
     {
       title: 'Judul',
       name: 'title',
-      type: 'string'
+      type: 'string',
+      validation: Rule => Rule.required()
     },
     {
       title: 'Deskripsi',
       name: 'text',
       type: 'text',
-      description: 'uwu',
+      description: 'Deskripsi website untuk ditampilakn di halama utama website.',
     },
     {
       title: 'Logo',
       name: 'logo',
-      type: 'image'
+      type: 'image',
+      validation: Rule => Rule.required()
     },
     {
       title: "Warna Utama",
@@ -40,13 +42,15 @@ export default {
           { title: "Blue", value: "#3B82F6" },
           { title: "Purple", value: "#8B5CF6" },
         ]
-      }
+      },
+      validation: Rule => Rule.required()
     },
   ], 
   preview: {
     select: {
       title: 'section',
       subtitle: 'title',
+      media: 'logo'
     }
   }
 }

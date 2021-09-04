@@ -14,6 +14,7 @@ const Hero = () => {
             url
           }
         },
+        price,
         color
       }`)
     .then(res => setContent(res[0]))
