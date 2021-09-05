@@ -39,28 +39,51 @@ const Products = () => {
       setDisplayProducts(res);
     })
     .catch(err => alert('Error, coba ulangi kembali.'));
+    sanityClient
+    .fetch(`
+        *[_type == 'product']{
+          name,
+          price,
+          desc,
+          limitedslot,
+          category -> {
+              title,
+              colors
+          },
+          image{
+              asset->{
+                  url
+              }
+          }
+      } | order(_createdAt asc)
+    `)
+    .then(res => console.log(res));
   }, [])
 
   return (
     <div class="py-60">
       <ProductToolbar parentCallback = {callback}/>
-      <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16 py-8">
+      <div class="flex grid grid-cols-12 pb-10 gap-x-5 gap-y-8 py-8 mx-4">
       {
         displayProducts && displayProducts.map(product => (
           <>
-            <div class="flex flex-col items-center col-span-12 space-y-3 sm:col-span-6 xl:col-span-4 rounded-lg">
-              <a href="#_" class="block">
-                  <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56" src={product.image.asset.url} />
+            <div class="flex flex-col items-center col-span-4 space-y-3 rounded-lg">
+              <a class="block" onClick={() => window.location.href=`/#/products/${product.name}/${product.price}/${product.desc}/${product.limitedslot}/${product.category.title}`}>
+                  <img 
+                  class="object-cover h-70 w-70 mb-1 rounded-lg shadow-sm" 
+                  src={product.image.asset.url} 
+                  // onClick={() => window.location.href="/#/products/oik"}
+                  />
               </a>
-              <span class="bg-yellow-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
+              {/* <span class="bg-yellow-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
                   <span>{product.category.title}</span>
               </span>
-              <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="#_">{product.name}</a></h2>
+              <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="/#/products">{product.name}</a></h2>
               <h2 class="text-md text-gray-900 font-bold sm:text-xl md:text-2xl">{formatRupiah(product.price)}</h2>
               <p class="text-sm text-gray-500">{product.desc}</p>
               <p class="pt-2 text-xs font-medium">
                 { product.limitedslot ? (  <span class="mx-1"> · Limited Slot!</span> ) : <span></span>}
-              </p>
+              </p> */}
             </div>
           </>
         ))

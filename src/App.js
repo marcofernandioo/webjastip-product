@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import ProductDetail from './components/ProductDetail';
 import Footer from './components/Footer';
 
 function App() {
@@ -11,8 +12,9 @@ function App() {
     <>
       <Navbar />
       <Switch>
-        <Route path = '/products' component = {Products} />
-        <Route path = '/' component = {Home} />
+        <Route exact path = '/products/:name/:price/:desc/:limitedslot/:category' component = {ProductDetail} />
+        <Route exact path = '/products' component = {Products} />
+        <Route exact path = '/' component = {Home} />
       </Switch>
       <Footer />
     </>
