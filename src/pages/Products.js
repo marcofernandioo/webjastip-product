@@ -68,22 +68,18 @@ const Products = () => {
         displayProducts && displayProducts.map(product => (
           <>
             <div class="flex flex-col items-center col-span-4 space-y-3 rounded-lg">
-              <a class="block" onClick={() => window.location.href=`/#/products/${product.name}/${product.price}/${product.desc}/${product.limitedslot}/${product.category.title}`}>
+              <a 
+                class="block" 
+                onClick={() => {
+                  let encodedURL = encodeURIComponent(product.image.asset.url);
+                  window.location.href=`/#/products/${product.name}/${product.price}/${product.desc}/${product.limitedslot}/${product.category.title}/${encodedURL}`;
+                }}
+              >
                   <img 
-                  class="object-cover h-70 w-70 mb-1 rounded-lg shadow-sm" 
-                  src={product.image.asset.url} 
-                  // onClick={() => window.location.href="/#/products/oik"}
+                    class="object-cover h-70 w-70 mb-1 rounded-lg shadow-sm" 
+                    src={product.image.asset.url}
                   />
               </a>
-              {/* <span class="bg-yellow-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                  <span>{product.category.title}</span>
-              </span>
-              <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="/#/products">{product.name}</a></h2>
-              <h2 class="text-md text-gray-900 font-bold sm:text-xl md:text-2xl">{formatRupiah(product.price)}</h2>
-              <p class="text-sm text-gray-500">{product.desc}</p>
-              <p class="pt-2 text-xs font-medium">
-                { product.limitedslot ? (  <span class="mx-1"> · Limited Slot!</span> ) : <span></span>}
-              </p> */}
             </div>
           </>
         ))
