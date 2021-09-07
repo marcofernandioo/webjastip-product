@@ -7,11 +7,8 @@ import sanityClient from './client';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Products from './pages/Products';
-import ProductDetail from './components/ProductDetail';
 import Footer from './components/Footer';
 
-// import ProductCard1 from './components/ProductCard1';
-// import ProductCard2 from './components/productdetails/ProductCard2';
 
 
 const fetcher = (url) => fetch(url).then(result => result);
@@ -38,13 +35,10 @@ function App() {
     <SWRConfig value = {{fetcher}}>
       <Navbar data = {social} />
       <Switch>
-        <Route exact path = '/products/:name/:price/:desc/:limitedslot/:category/:imgURL' component = {ProductDetail} />
         <Route exact path = '/products' component = {Products} />
         <Route exact path = '/' component = {Home} />
       </Switch>
       <Footer data = {social}/>
-      {/* <ProductCard1 />
-      <ProductCard2 /> */}
     </SWRConfig>
   );
 }

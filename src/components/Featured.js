@@ -58,7 +58,7 @@ const BestProducts = () => {
             products && products.map(product => (
               <>
                 <div class="flex flex-col items-center col-span-12 space-y-3 sm:col-span-6 xl:col-span-4 rounded-lg">
-                  <a href="#_" class="block">
+                  <a href="/#/products" class="block">
                       <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56" src={product.image.asset.url} />
                   </a>
                   <span class="bg-yellow-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
