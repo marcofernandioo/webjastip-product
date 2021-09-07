@@ -61,12 +61,6 @@ const Products = () => {
   return (
     <div class="py-60">
       
-          <ProductCard 
-            closeCard={handleCloseCard}
-            openState={openCard} 
-            product = {cardProduct}
-          /> 
-        
       <ProductToolbar parentCallback = {callback}/>
       <div class="grid grid-cols-12 pb-10 gap-x-10 gap-y-8 py-8 mx-4">
       {
@@ -78,6 +72,7 @@ const Products = () => {
                 onClick={() => {
                   setOpenCard(true);
                   setCardProduct(product);
+                  // console.log('clicked product')
                 }}
               >
                   <img 
@@ -90,7 +85,17 @@ const Products = () => {
           </>
         ))
       }
-      </div>   
+      </div>
+      { 
+        openCard && cardProduct ? (
+          <ProductCard 
+            closeCard={handleCloseCard}
+            openState={openCard} 
+            product = {cardProduct}
+          /> 
+        ): <div />
+      }
+      
     </div>
   );
 };
