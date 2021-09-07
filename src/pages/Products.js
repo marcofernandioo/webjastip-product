@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react';
 import useSWR from 'swr';
 
 import ProductToolbar from '../components/ProductToolbar';
+import ProductCard from '../components/ProductCard';
 import sanityClient from '../client';
-
-import formatRupiah from '../utils/formatRupiah';
-
 
 const Products = () => {
   const [displayProducts, setDisplayProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [openCard, setOpenCard] = useState(false);
+  const [cardProduct, setCardProduct] = useState();
   // const [productswr, setpswr] = useState([]);
   const queryString = `
   *[_type == 'product']{
@@ -28,6 +28,7 @@ const Products = () => {
     }
 } | order(_createdAt asc)
 `;
+
 // const query = process.env.REACT_APP_API + queryString;
   const query = process.env.REACT_APP_API + encodeURIComponent(queryString);
   const { data: productswr, error } = useSWR(query)
@@ -44,7 +45,6 @@ const Products = () => {
     .then(res => {
       setProducts(res);
       setDisplayProducts(res);
-      console.log(res);
     })
     .catch(err => alert('Error, coba ulangi kembali.'));
   }, [])
@@ -54,9 +54,19 @@ const Products = () => {
   // console.log(productswr.body);
   // console.log(productswr.headers);
 
+  const handleCloseCard = () => {
+    setOpenCard(false);
+  }
 
   return (
     <div class="py-60">
+      
+          <ProductCard 
+            closeCard={handleCloseCard}
+            openState={openCard} 
+            product = {cardProduct}
+          /> 
+        
       <ProductToolbar parentCallback = {callback}/>
       <div class="grid grid-cols-12 pb-10 gap-x-10 gap-y-8 py-8 mx-4">
       {
@@ -66,8 +76,8 @@ const Products = () => {
               <a 
                 class="block" 
                 onClick={() => {
-                  let encodedURL = encodeURIComponent(product.image.asset.url);
-                  window.location.href=`/#/products/${product.name}/${product.price}/${product.desc}/${product.limitedslot}/${product.category.title}/${encodedURL}`;
+                  setOpenCard(true);
+                  setCardProduct(product);
                 }}
               >
                   <img 
@@ -80,7 +90,7 @@ const Products = () => {
           </>
         ))
       }
-      </div>
+      </div>   
     </div>
   );
 };

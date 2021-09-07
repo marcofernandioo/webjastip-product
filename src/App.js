@@ -10,6 +10,10 @@ import Products from './pages/Products';
 import ProductDetail from './components/ProductDetail';
 import Footer from './components/Footer';
 
+// import ProductCard1 from './components/ProductCard1';
+// import ProductCard2 from './components/productdetails/ProductCard2';
+
+
 const fetcher = (url) => fetch(url).then(result => result);
 function App() {
   const [social, setSocial] = useState({});
@@ -22,14 +26,14 @@ function App() {
     sanityClient
       .fetch(queryString)
       .then(res => {
-        console.log(res);
         let socialObj = {};
         if (res.WA) socialObj.wa = res.WA;
         if (res.IG) socialObj.ig = res.IG;
         setSocial(socialObj);
       })
-      .catch(err => console.log(err));
+      .catch(err => alert('Error, coba ulangi kembali.'));
   }, [])
+
   return (
     <SWRConfig value = {{fetcher}}>
       <Navbar data = {social} />
@@ -39,6 +43,8 @@ function App() {
         <Route exact path = '/' component = {Home} />
       </Switch>
       <Footer data = {social}/>
+      {/* <ProductCard1 />
+      <ProductCard2 /> */}
     </SWRConfig>
   );
 }
