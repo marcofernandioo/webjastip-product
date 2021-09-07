@@ -1,13 +1,36 @@
 import React, {useState, useEffect} from 'react';
+import useSWR from 'swr';
 
 import ProductToolbar from '../components/ProductToolbar';
 import sanityClient from '../client';
 
 import formatRupiah from '../utils/formatRupiah';
 
+
 const Products = () => {
   const [displayProducts, setDisplayProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  // const [productswr, setpswr] = useState([]);
+  const queryString = `
+  *[_type == 'product']{
+    name,
+    price,
+    desc,
+    limitedslot,
+    category -> {
+        title,
+        colors
+    },
+    image{
+        asset->{
+            url
+        }
+    }
+} | order(_createdAt asc)
+`;
+// const query = process.env.REACT_APP_API + queryString;
+  const query = process.env.REACT_APP_API + encodeURIComponent(queryString);
+  const { data: productswr, error } = useSWR(query)
 
   const callback = (search) => {
     const filteredProducts = search
@@ -17,29 +40,20 @@ const Products = () => {
   }
   useEffect(() => {
     sanityClient
-    .fetch(`
-        *[_type == 'product']{
-            name,
-            price,
-            desc,
-            limitedslot,
-            category -> {
-                title,
-                colors
-            },
-            image{
-                asset->{
-                    url
-                }
-            }
-        } | order(_createdAt asc)
-    `)
+    .fetch(queryString)
     .then(res => {
       setProducts(res);
       setDisplayProducts(res);
+      console.log(res);
     })
     .catch(err => alert('Error, coba ulangi kembali.'));
   }, [])
+
+  // if (error) return <div>failed to load</div>
+  // if (!products) return <div>loading...</div>
+  // console.log(productswr.body);
+  // console.log(productswr.headers);
+
 
   return (
     <div class="py-60">

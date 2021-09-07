@@ -7,7 +7,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import product from './product';
 import kategori from './kategori';
 import content from './content';
-import batch from './batch';
+import socials from './socials';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -20,6 +20,6 @@ export default createSchema({
     product,
     kategori,
     content,
-    // batch
+    socials
   ]),
 })
