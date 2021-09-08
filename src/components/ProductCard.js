@@ -6,6 +6,7 @@ import formatRupiah from '../utils/formatRupiah';
 const ProductCard1 = ({closeCard, product, openState}) => {
     return (
         <Dialog
+            style={{borderStyle: 'double'}}
             open={openState}
             onClose={closeCard}
             PaperProps={{
@@ -15,7 +16,7 @@ const ProductCard1 = ({closeCard, product, openState}) => {
                 },
               }}
         >
-            <div class="bg-opacity-0 antialiased text-gray-900" style={{display:"grid",height:"100%",placeItems:"center"}}>
+            <div class="bg-opacity-0 antialiased text-gray-900" style={{display:"grid",placeItems:"center", height:'100%', borderStyle: 'double'}}>
                 <div>
                     <img
                         src={product.image.asset.url}
