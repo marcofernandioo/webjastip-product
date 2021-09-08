@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 const ProductToolbar = ({parentCallback, categories}) => {
     const classes = useStyles();
     const [search, setSearch] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     return (
         <div class="fixed left-0 right-0 top-10">
