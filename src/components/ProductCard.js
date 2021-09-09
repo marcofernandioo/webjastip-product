@@ -21,6 +21,7 @@ const ProductCard1 = ({closeCard, product, openState}) => {
                     <img
                         src={product.image.asset.url}
                         class="object-cover object-center rounded-lg shadow-md"
+                        style = {{height:'60vh', objectFit: 'contain', margin: 'auto', minWidth: "50vw"}}
                     />
                     <div class="relative px-4 -mt-16  ">
                         <div class="bg-white p-6 rounded-lg shadow-lg">
