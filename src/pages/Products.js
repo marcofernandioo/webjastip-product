@@ -87,7 +87,7 @@ const Products = () => {
   }
 
   return (
-    <div class="py-60">
+    <div class="py-5">
       <ProductToolbar parentCallback = {callback} categories = {categories}/>
       <div class="grid grid-cols-12 pb-10 gap-x-3 gap-y-3 py-8 mx-4">
       {
