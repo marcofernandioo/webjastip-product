@@ -1,6 +1,7 @@
 import react, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { SWRConfig } from 'swr';
+import axios from 'axios';
 
 import sanityClient from './client';
 
@@ -9,9 +10,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import Footer from './components/Footer';
 
-
-
-const fetcher = (url) => fetch(url).then(result => result);
+const fetcher = (url) => axios.get(url).then(res=> res.data.result);
 function App() {
   const [social, setSocial] = useState({});
   useEffect(() => {
@@ -24,7 +23,11 @@ function App() {
       .fetch(queryString)
       .then(res => {
         let socialObj = {};
-        if (res.WA) socialObj.wa = res.WA;
+        if (res.WA) {
+          let wa_num = res.WA;
+          let valid_wa = wa_num.replace(/0/, '62');
+          socialObj.wa = valid_wa;
+        }
         if (res.IG) socialObj.ig = res.IG;
         setSocial(socialObj);
       })

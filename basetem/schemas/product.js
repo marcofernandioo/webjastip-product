@@ -24,7 +24,7 @@ export default {
     {
       title: 'Keterangan',
       name: 'desc',
-      type: 'string',
+      type: 'text',
       validation: Rule => Rule.required()
     },
     {

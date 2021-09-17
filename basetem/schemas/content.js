@@ -7,7 +7,6 @@ export default {
       title: 'Bagian',
       name: 'section',
       type: 'string',
-      // readOnly: true
     },
     {
       title: 'Judul',

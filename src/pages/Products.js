@@ -10,9 +10,8 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [openCard, setOpenCard] = useState(false);
   const [cardProduct, setCardProduct] = useState();
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState([]);
 
-  // const [productswr, setpswr] = useState([]);
   const queryProductsString = `
     *[_type == 'product']{
       name,
@@ -36,12 +35,16 @@ const Products = () => {
     }
   `;
 
-// const query = process.env.REACT_APP_API + queryProductsString;
   const query = process.env.REACT_APP_API + encodeURIComponent(queryProductsString);
-  const { data: productswr, error } = useSWR(query)
+  const { data : products_, error } = useSWR(query)
+  // console.log(products_);
+  // setDisplayProducts(products_);
 
-  const callback = (search,category) => {
-    console.log(search,category);
+  useEffect(() => {
+    setDisplayProducts(products_);
+  }, [products_])
+
+  const callback = (search,category) => { // Filter products by search string and/or selected category onChange for each argument.
     const filteredProducts = () => { // Yes, I will refactor this spaghetti code after I've delivered this product.
       if (products) {
         if (search && category === "") // Search exists, category is all.
@@ -57,32 +60,22 @@ const Products = () => {
     setDisplayProducts(filteredProducts());
   }
 
-  useEffect(() => {
-    sanityClient
-    .fetch(queryProductsString)
-    .then(res => {
-      setProducts(res);
-      setDisplayProducts(res);
-    })
-    .catch(err => alert('Error, coba ulangi kembali.'));
-  }, [])
-
-  useEffect(() => {
+  useEffect(() => { // Queries categories for the dropdown menu.
     sanityClient
     .fetch(queryCategoriesString)
     .then(res => {
       const cats_ = res.map(cat => cat.title);
       setCategories(cats_)
     })
-    .catch(err => alert('Error, kategori tidak tercari. Coba ulangi kembali'));
+    .catch(err => alert('Error, kategori tidak ditemukan. Coba ulangi kembali'));
   }, [])
 
-  // if (error) return <div>failed to load</div>
-  // if (!products) return <div>loading...</div>
-  // console.log(productswr.body);
-  // console.log(productswr.headers);
 
-  const handleCloseCard = () => {
+  if (error) return <div>failed to load</div>
+  if (!products_) return <div>loading...</div>
+  // console.log(products_.data.result);
+
+  const handleCloseCard = () => { // Closes the ProductCard component.
     setOpenCard(false);
   }
 
