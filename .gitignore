@@ -2,8 +2,8 @@
 
 # dependencies
 **/node_modules
+**/basetem
 /.pnp
-/basetem
 .pnp.js
 .env
 
