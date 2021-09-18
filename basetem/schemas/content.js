@@ -4,13 +4,8 @@ export default {
   type: 'document',
   fields: [
     {
-      title: 'Bagian',
-      name: 'section',
-      type: 'string',
-    },
-    {
       title: 'Judul',
-      name: 'title',
+      name: 'header',
       type: 'string',
       validation: Rule => Rule.required()
     },
@@ -24,30 +19,13 @@ export default {
       title: 'Logo',
       name: 'logo',
       type: 'image',
-      validation: Rule => Rule.required()
-    },
-    {
-      title: "Warna Utama",
-      description: 'Warna yang dipilih akan menjadi warna utama pada website.',
-      name: "color",
-      type: "colorlist",
-      options: {
-        list: [
-          { title: "White", value: "white" },
-          { title: "Red", value: "#EF4444" },
-          { title: "Orange", value: "#F59E0B"},
-          { title: "Yellow", value: "#FBBF24"},
-          { title: "Green", value: "#10B981" },
-          { title: "Blue", value: "#3B82F6" },
-          { title: "Purple", value: "#8B5CF6" },
-        ]
-      },
+      description: 'Logo dari bisnismu.',
       validation: Rule => Rule.required()
     },
   ], 
   preview: {
     select: {
-      title: 'section',
+      title: 'header',
       subtitle: 'title',
       media: 'logo'
     }

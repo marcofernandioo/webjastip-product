@@ -17,6 +17,7 @@ export default {
         }
     ],
     preview: {
-        title: "Link Sosial Media"
+        title: "IG",
+        subtitle: 'WA'
     }
 }

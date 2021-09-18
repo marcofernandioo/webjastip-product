@@ -2,23 +2,24 @@ import React, { useState, useEffect } from 'react';
 import sanityClient from '../client';
 
 const Hero = () => {
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState();
   useEffect(() => {
-    sanityClient.fetch(
-      `*[_type == 'content' && section == 'Header']{
-        title,
-        text,
-        logo{
-          asset -> {
-            _id,
-            url
+    sanityClient.fetch(`
+    *[_type == 'content']{
+          header,
+          text,
+          logo{
+            asset -> {
+              _id,
+              url
+            }
           }
-        },
-        price,
-        color
-      }`)
-    .then(res => setContent(res[0]))
-    .catch(err => alert('Error, coba ulangi kembali.'));
+    } [0]
+    `)
+    .then(res => {
+      setContent(res);
+    })
+    .catch(err => alert('Konten tidak ditemukan, coba ulangi kembali.'));
   }, []);
 
   return (
@@ -30,7 +31,7 @@ const Hero = () => {
               <div class="w-full md:w-1/2 md:px-3">
                 <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                   <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-                    <span class="block xl:inline"> {content.title} </span>
+                    <span class="block xl:inline"> {content.header} </span>
                   </h1>
                   <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">{content.text}</p>
                   <div class="relative flex flex-col sm:flex-row sm:space-x-4">
@@ -42,7 +43,7 @@ const Hero = () => {
                 </div>
               </div>
               <div class="w-full md:w-1/2">
-                <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                <div class="w-full h-auto overflow-hidden rounded-md sm:rounded-xl">
                     <img src={content.logo.asset.url} />
                   </div>
               </div>

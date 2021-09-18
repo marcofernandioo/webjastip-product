@@ -15,8 +15,7 @@ const BestProducts = () => {
         desc,
         limitedslot,
         category -> {
-          title,
-          colors
+          title
         },
         image{
           asset->{
@@ -28,7 +27,7 @@ const BestProducts = () => {
     .then(res => {
       setProducts(res);
     })
-    .catch(err => alert('Error, coba ulangi kembali'));
+    .catch(err => alert('Produk tidak ditemukan, coba ulangi kembali'));
   }, []);
 
   useEffect(() => {
@@ -45,9 +44,8 @@ const BestProducts = () => {
   `)
   .then(res => {
     setBatch(res);
-    // console.log(res);
   })
-  .catch(err => alert("Error, coba ulangi kembali"));
+  .catch(err => alert("Batch tidak ditemukan, coba ulangi kembali"));
   }, [])
 
   return (

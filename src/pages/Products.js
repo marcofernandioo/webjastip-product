@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import useSWR from 'swr';
 
 import ProductToolbar from '../components/ProductToolbar';
 import ProductCard from '../components/ProductCard';
@@ -19,30 +18,26 @@ const Products = () => {
       desc,
       limitedslot,
       category -> {
-          title,
-          colors
+      title
       },
       image{
-          asset->{
-              url
-          }
+        asset->{
+          url
+        }
       }
     } | order(_createdAt asc) | order(category.title asc)
   `;
-  const queryCategoriesString = `
-    *[_type == 'kategori'] {
-      title
-    }
-  `;
-
-  const query = process.env.REACT_APP_API + encodeURIComponent(queryProductsString);
-  const { data : products_, error } = useSWR(query)
-  // console.log(products_);
-  // setDisplayProducts(products_);
 
   useEffect(() => {
-    setDisplayProducts(products_);
-  }, [products_])
+    sanityClient.fetch(queryProductsString)
+      .then(res => {
+        setProducts(res);
+        setDisplayProducts(res);
+        const unique = [...new Set(res.map(prod => prod.category.title))];
+        setCategories(unique);
+      })
+      .catch(err => alert('Produk tidak ditemukan. Coba ulangi kembali.'));
+  }, []);
 
   const callback = (search,category) => { // Filter products by search string and/or selected category onChange for each argument.
     const filteredProducts = () => { // Yes, I will refactor this spaghetti code after I've delivered this product.
@@ -59,21 +54,6 @@ const Products = () => {
     }
     setDisplayProducts(filteredProducts());
   }
-
-  useEffect(() => { // Queries categories for the dropdown menu.
-    sanityClient
-    .fetch(queryCategoriesString)
-    .then(res => {
-      const cats_ = res.map(cat => cat.title);
-      setCategories(cats_)
-    })
-    .catch(err => alert('Error, kategori tidak ditemukan. Coba ulangi kembali'));
-  }, [])
-
-
-  if (error) return <div>failed to load</div>
-  if (!products_) return <div>loading...</div>
-  // console.log(products_.data.result);
 
   const handleCloseCard = () => { // Closes the ProductCard component.
     setOpenCard(false);
@@ -112,7 +92,7 @@ const Products = () => {
             openState={openCard} 
             product = {cardProduct}
           /> 
-        ): <div />
+        ) : <div />
       }
     </div>
   );
