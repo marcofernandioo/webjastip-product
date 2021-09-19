@@ -10,7 +10,7 @@ export default {
       validation: Rule => Rule.required()
     },
     {
-      title: "Nama",
+      title: "Nama produk",
       name: 'name',
       type: 'string',
       validation: Rule => Rule.required()

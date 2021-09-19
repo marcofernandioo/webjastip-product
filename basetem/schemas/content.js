@@ -19,7 +19,7 @@ export default {
       title: 'Logo',
       name: 'logo',
       type: 'image',
-      description: 'Logo dari bisnismu.',
+      description: 'Gunakan logo dari bisnismu.',
       validation: Rule => Rule.required()
     },
   ], 
