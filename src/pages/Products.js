@@ -25,7 +25,7 @@ const Products = () => {
           url
         }
       }
-    } | order(_createdAt asc) | order(category.title asc)
+    } | order(_createdAt asc)
   `;
 
   useEffect(() => {
